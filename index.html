@@ -3,228 +3,90 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SK Enterprises - Shop</title>
-    <link rel="stylesheet" href="styles.css">
+    <title>Cute Teddy Animation</title>
     <style>
         body {
-            font-family: Arial, sans-serif;
-            background-color: lightgrey;
-            margin: 0;
-            padding: 0;
-        }
-
-        header {
-            background: linear-gradient(90deg, #ffb366, #d9a36a);
             display: flex;
+            flex-direction: column;
             align-items: center;
-            padding: 15px;
-            justify-content: space-between;
+            justify-content: center;
+            height: 100vh;
+            background-color: #ffe6e6;
         }
-
-        .logo-container {
-            display: flex;
-            align-items: center;
-        }
-
-        .logo {
-            height: 70px;
-            margin-right: 15px;
-        }
-
-        .company-name {
-            font-size: 50px;
-            font-weight: bold;
-            color: #333;
-        }
-
-        nav ul {
-            list-style: none;
-            display: flex;
-            padding: 0;
-        }
-
-        nav ul li {
-            margin: 0 15px;
-        }
-
-        nav ul li a {
-            text-decoration: none;
-            background: grey;
-            color: white;
-            font-weight: bold;
+        .button {
+            background-color: #ff99cc;
+            border: none;
+            padding: 10px 20px;
             font-size: 18px;
-            padding: 12px 18px;
-            border-radius: 5px;
+            color: white;
+            border-radius: 20px;
+            cursor: pointer;
+            margin-bottom: 20px;
         }
-
-        nav ul li a:hover {
-            background: #333;
-        }
-
-        .advertisement {
-            width: 80%;
-            margin: 20px auto;
-            overflow: hidden;
-            position: relative;
-            text-align: center;
-        }
-
-        .slides img {
-            width: 100%;
-            border-radius: 10px;
+        .teddy {
+            width: 250px;
+            height: 250px;
+            stroke-dasharray: 1000;
+            stroke-dashoffset: 1000;
+            stroke: #704214;
+            fill: none;
+            animation: draw 3s linear forwards, fillColor 1s 3.2s forwards, dance 1s 4.2s infinite alternate ease-in-out;
             display: none;
         }
-
-        .slides img.active {
-            display: block;
+        @keyframes draw {
+            to {
+                stroke-dashoffset: 0;
+            }
         }
-
-        .dots {
-            text-align: center;
-            margin-top: 10px;
+        @keyframes fillColor {
+            to {
+                fill: #d19c6b;
+            }
         }
-
-        .dot {
-            height: 12px;
-            width: 12px;
-            margin: 0 5px;
-            background-color: grey;
-            border: 2px solid black;
-            border-radius: 50%;
-            display: inline-block;
-            cursor: pointer;
+        @keyframes dance {
+            0% {
+                transform: rotate(-5deg) translateY(0);
+            }
+            100% {
+                transform: rotate(5deg) translateY(-5px);
+            }
         }
-
-        .dot.active {
-            background-color: #ffb366;
-        }
-
-        .product-list {
-            text-align: center;
-            padding: 40px;
-        }
-
-        .products {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 20px;
-            justify-content: center;
-            padding: 20px;
-        }
-
-        .product {
-            background: linear-gradient(145deg, #ffb366, #d9a36a);
-            padding: 20px;
-            border-radius: 15px;
-            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
-            text-align: center;
-            transition: transform 0.3s, box-shadow 0.3s;
-        }
-
-        .product:hover {
-            transform: scale(1.05);
-            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.4);
-        }
-
-        .product img {
-            width: 100%;
-            border-radius: 10px;
-            height: 300px;
-            object-fit: cover;
-        }
-
-        .product-name {
-            font-size: 22px;
+        .message {
+            display: none;
+            font-size: 24px;
+            color: #704214;
+            margin-top: 20px;
             font-weight: bold;
-            color: white;
-            margin: 10px 0;
-        }
-
-        .price {
-            font-size: 20px;
-            color: #333;
-            font-weight: bold;
-        }
-
-        .view-more {
-            display: block;
-            margin: 30px auto;
-            padding: 12px 25px;
-            background-color: #ffb366;
-            color: white;
-            text-decoration: none;
-            border-radius: 5px;
-            font-weight: bold;
-            font-size: 18px;
-            transition: background 0.3s;
-        }
-
-        .view-more:hover {
-            background-color: #d98c5f;
         }
     </style>
-    <script>
-        let currentSlide = 0;
-        function changeSlide(index) {
-            let slides = document.querySelectorAll('.slides img');
-            let dots = document.querySelectorAll('.dot');
-            slides[currentSlide].classList.remove('active');
-            dots[currentSlide].classList.remove('active');
-            currentSlide = index;
-            slides[currentSlide].classList.add('active');
-            dots[currentSlide].classList.add('active');
-        }
-    </script>
 </head>
 <body>
-    <header>
-        <div class="logo-container">
-            <a href="https://example.com">
-                <img src="SK ENTERPRICES.jpg" alt="" class="logo">
-                <span class="company-name">SK Enterprises</span>
-            </a>
-        </div>
-        <nav>
-            <ul>
-                <li><a href="index.html">Home</a></li>
-                <li><a href="about.html">About Us</a></li>
-                <li><a href="shop.html">Shop</a></li>
-                <li><a href="contact.html">Contact Us</a></li>
-            </ul>
-        </nav>
-    </header>
-    
-    <section class="advertisement">
-        <div class="slides">
-            <img src="ad1.jpg" alt="Ad 1" class="active">
-            <img src="ad2.jpg" alt="Ad 2">
-            <img src="ad3.jpg" alt="Ad 3">
-        </div>
-        <div class="dots">
-            <span class="dot active" onclick="changeSlide(0)"></span>
-            <span class="dot" onclick="changeSlide(1)"></span>
-            <span class="dot" onclick="changeSlide(2)"></span>
-        </div>
-    </section>
-    
-    <section class="product-list">
-        <h1>Our Products</h1>
-        <div class="products">
-            <script>
-                for (let i = 1; i <= 50; i++) {
-                    document.write(`
-                        <div class="product">
-                            <a href="product${i}.html">
-                                <img src="Calacatta Marble.jpg" alt="Product ${i}">
-                                <p class="product-name"> Calacatta Marble</p>
-                                <p class="price">₹${(Math.random() * 5000 + 500).toFixed(2)}</p>
-                            </a>
-                        </div>
-                    `);
-                }
-            </script>
-        </div>
-        <a href="more-products.html" class="view-more">View More</a>
-    </section>
+    <button class="button" onclick="document.querySelector('.teddy').style.display='block'; document.querySelector('.message').style.display='block';">Click Here Cutie</button>
+    <svg class="teddy" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+        <!-- Teddy Head -->
+        <ellipse cx="100" cy="100" rx="70" ry="60" stroke-width="4" />
+        
+        <!-- Teddy Ears -->
+        <ellipse cx="50" cy="50" rx="30" ry="30" stroke-width="4" />
+        <ellipse cx="150" cy="50" rx="30" ry="30" stroke-width="4" />
+        
+        <!-- Inner Ears -->
+        <ellipse cx="50" cy="50" rx="15" ry="15" fill="#f4c6a0" />
+        <ellipse cx="150" cy="50" rx="15" ry="15" fill="#f4c6a0" />
+        
+        <!-- Eyes -->
+        <circle cx="80" cy="90" r="10" fill="black" />
+        <circle cx="120" cy="90" r="10" fill="black" />
+        
+        <!-- Nose and Mouth -->
+        <ellipse cx="100" cy="110" rx="12" ry="8" fill="black" />
+        <path d="M 100 118 Q 90 130 85 120" stroke="black" stroke-width="4" fill="none" />
+        <path d="M 100 118 Q 110 130 115 120" stroke="black" stroke-width="4" fill="none" />
+        
+        <!-- Cheeks -->
+        <circle cx="70" cy="110" r="5" fill="#ff9999" />
+        <circle cx="130" cy="110" r="5" fill="#ff9999" />
+    </svg>
+    <div class="message">This is for you, cutie! ❤️</div>
 </body>
 </html>
