@@ -21,7 +21,11 @@
             color: white;
             border-radius: 20px;
             cursor: pointer;
-            margin-bottom: 20px;
+            margin-bottom: 10px;
+            display: none;
+        }
+        #startButton {
+            display: block;
         }
         .teddy {
             width: 250px;
@@ -30,8 +34,15 @@
             stroke-dashoffset: 1000;
             stroke: #704214;
             fill: none;
-            animation: draw 3s linear forwards, fillColor 1s 3.2s forwards, dance 1s 4.2s infinite alternate ease-in-out;
+            animation: draw 3s linear forwards, fillColor 1s 3.2s forwards;
             display: none;
+            transition: transform 0.5s ease-in-out;
+        }
+        .eye {
+            transition: all 0.5s ease-in-out;
+        }
+        .closed-eyes {
+            d: path("M 70 90 Q 80 80 90 90");
         }
         @keyframes draw {
             to {
@@ -59,9 +70,34 @@
             font-weight: bold;
         }
     </style>
+    <script>
+        function showTeddy() {
+            document.querySelector('.teddy').style.display = 'block';
+            document.querySelector('.message').style.display = 'block';
+            document.querySelectorAll('.button').forEach(btn => btn.style.display = 'inline-block');
+            document.getElementById('startButton').style.display = 'none';
+        }
+        function hugTeddy() {
+            let teddy = document.querySelector('.teddy');
+            teddy.style.transform = teddy.style.transform === 'scale(1.2)' ? 'scale(1)' : 'scale(1.2)';
+        }
+        function danceTeddy() {
+            let teddy = document.querySelector('.teddy');
+            teddy.style.animation = teddy.style.animation.includes('dance') ? 'draw 3s linear forwards, fillColor 1s 3.2s forwards' : 'draw 3s linear forwards, fillColor 1s 3.2s forwards, dance 1s infinite alternate ease-in-out';
+        }
+        function eatTeddy() {
+            alert('Teddy is eating yummy honey! 🍯');
+        }
+        function sleepTeddy() {
+            let teddy = document.querySelector('.teddy');
+            teddy.style.opacity = teddy.style.opacity === '0.5' ? '1' : '0.5';
+            document.getElementById('eyeLeft').setAttribute('d', teddy.style.opacity === '0.5' ? "M 70 90 Q 80 85 90 90" : "M 70 85 Q 80 90 90 85");
+            document.getElementById('eyeRight').setAttribute('d', teddy.style.opacity === '0.5' ? "M 110 90 Q 120 85 130 90" : "M 110 85 Q 120 90 130 85");
+        }
+    </script>
 </head>
 <body>
-    <button class="button" onclick="document.querySelector('.teddy').style.display='block'; document.querySelector('.message').style.display='block';">Click Here Cutie</button>
+    <button id="startButton" class="button" onclick="showTeddy()">Click Here Cutie</button>
     <svg class="teddy" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
         <!-- Teddy Head -->
         <ellipse cx="100" cy="100" rx="70" ry="60" stroke-width="4" />
@@ -75,8 +111,8 @@
         <ellipse cx="150" cy="50" rx="15" ry="15" fill="#f4c6a0" />
         
         <!-- Eyes -->
-        <circle cx="80" cy="90" r="10" fill="black" />
-        <circle cx="120" cy="90" r="10" fill="black" />
+        <path id="eyeLeft" class="eye" d="M 70 85 Q 80 90 90 85" stroke="black" stroke-width="4" fill="none" />
+        <path id="eyeRight" class="eye" d="M 110 85 Q 120 90 130 85" stroke="black" stroke-width="4" fill="none" />
         
         <!-- Nose and Mouth -->
         <ellipse cx="100" cy="110" rx="12" ry="8" fill="black" />
@@ -87,6 +123,10 @@
         <circle cx="70" cy="110" r="5" fill="#ff9999" />
         <circle cx="130" cy="110" r="5" fill="#ff9999" />
     </svg>
+    <button class="button" onclick="hugTeddy()">Hug Him?</button>
+    <button class="button" onclick="danceTeddy()">Want Teddy to Dance?</button>
+    <button class="button" onclick="eatTeddy()">Want Teddy to Eat?</button>
+    <button class="button" onclick="sleepTeddy()">Want Teddy to Sleep?</button>
     <div class="message">This is for you, cutie! ❤️</div>
 </body>
 </html>
